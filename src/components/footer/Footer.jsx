@@ -9,9 +9,9 @@ function Footer(){
 
         <div className='home-footer flex-center flex-col'>
             <div className='social-link padd-top-sm'>
-                <Link to="/"><div className='avatar-sm avatar-round flex-center footer-avatar' ><BsTwitter/></div> </Link>
-                <Link to="/"><div className='avatar-sm avatar-round flex-center footer-avatar' > <BsGithub/> </div> </Link>
-                <Link to="/"><div className='avatar-sm avatar-round flex-center footer-avatar' > <BsInstagram/> </div> </Link>
+                <a href='/'><div className='avatar-sm avatar-round flex-center footer-avatar' ><BsTwitter/></div> </a>
+                <a href='/'><div className='avatar-sm avatar-round flex-center footer-avatar' > <BsGithub/> </div> </a>
+                <a href='/'><div className='avatar-sm avatar-round flex-center footer-avatar' > <BsInstagram/> </div> </a>
             </div>
             <ul className='padd-top-sm'>
               <li className="list-inline"><Link to="/"></Link>Home</li>

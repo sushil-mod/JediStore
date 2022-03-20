@@ -1,0 +1,13 @@
+
+.category-div{
+
+    width: 10rem;
+    height: 10rem;
+
+    padding: 1rem;
+    border-radius: 10%;
+    
+}
+.category-div:hover{
+    box-shadow:  0 4px 8px 0 var(--box-shadow);
+}

@@ -1,0 +1,21 @@
+
+.badge-arrival{
+    background-color: orange ;
+}
+
+
+.price{
+    color: green ; 
+}
+.original-price , .wishlist-icon {
+   
+    color: var(--gray-color) ;
+}
+.original-price{
+
+   text-decoration: line-through ; 
+}
+.wishlist-icon:hover{
+    color: var(--red-solid);
+    cursor: pointer;
+}

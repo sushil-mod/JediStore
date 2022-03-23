@@ -5,20 +5,20 @@ import "./App.css";
 import Footer from "./components/footer/Footer";
 import Navbar from "./components/navbar/Navbar";
 import Home from "./pages/home/Home";
+import Product from "./pages/product/Product";
+
 
 
 function App() {
   return (
    
     <div>
-      <Navbar/>
         <Routes>
 
             <Route path="/mockman" element={ <MockMan/> } />
             <Route path="/" element={ <Home/> }  />
-
+            <Route path="/products" element={<Product/>} />
         </Routes>
-      <Footer/>
     </div>
      
   );

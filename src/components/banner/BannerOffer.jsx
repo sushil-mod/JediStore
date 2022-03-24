@@ -4,7 +4,6 @@ import React from 'react';
 function BannerOffer(){
 
     return<>
-
         <div class="home-ad flex-center wd-100">
             <div> 
                 <p><h1>Jedi store </h1></p>

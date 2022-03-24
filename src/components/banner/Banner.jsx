@@ -12,7 +12,7 @@ function Banner (){
             <div class="home-img-txt pos-abt">
                 <p><h1>Jedi Store </h1> </p>
                 <p class="padd-md">Feel the force with our collection of toys, action figures, costumes & more.</p>
-                <Link to="/"><button class="btn shop-btn " >Shop Now </button></Link>
+                <Link to="/products"><button class="btn shop-btn " >Shop Now </button></Link>
             </div>
         </div>
     </>

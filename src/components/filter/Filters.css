@@ -1,0 +1,16 @@
+.filter-btn{
+    color: var(--text-color);
+    border: none;
+    background-color: var(--bg-color);
+    padding: 0.5rem;
+    cursor: pointer;
+}
+.filter-btn:hover  {
+    background-color: rgba(230, 221, 202, 0.568) ;
+}
+.aside-height{
+    height : 80vh ;
+}
+.filter-border{
+    border-bottom : 2px solid var(--bg-color) ;
+}

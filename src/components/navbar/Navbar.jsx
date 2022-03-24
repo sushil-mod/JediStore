@@ -1,14 +1,11 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-
-
 import "./Navbar.css";
-
 function Navbar (){
 
     return<>
-        <nav className="navbar flex-space-btw wd-100 bx-shadow">
+        <nav className="navbar flex-space-btw wd-100 bx-shadow navbar-position">
             <Link to="/">
                 <div className="nav-logo"><i class="fas fa-jedi nav-logo-icon"></i> <span className="nav-logo-txt">Jedi Store</span>
                 </div>
@@ -37,7 +34,6 @@ function Navbar (){
             </ul>
         </div>
     </nav>
-
     </>
 
 }

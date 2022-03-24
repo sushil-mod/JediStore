@@ -10,7 +10,7 @@ import './Product.css';
 function Product() {
 
 
-    const { productList } = useProducts();
+    const { filteredList  } = useProducts();
   return <>
      <Navbar/>
   <div className='d-flex' >
@@ -19,7 +19,7 @@ function Product() {
 
         <div className='main-content-product' > 
 
-                {productList.map(( product )=>  <ProductCard product={ product }  key = {product._id} />  )}
+                {filteredList.map(( product )=>  <ProductCard product={ product }  key = {product._id} />  )}
 
         </div> 
 

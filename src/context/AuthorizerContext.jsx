@@ -6,12 +6,10 @@ import  authReducerFunc from '../reducer/authReducerFunc';
 const AuthorizerContext = createContext();
 
 const AuthorizeProvider = ({children})=>{
-
     const initialAuthState = {
         loginStatus : false ,
         encodedToken :""
     }
-
     const [ authState , authDispatch ] = useReducer( authReducerFunc , initialAuthState);
 
     return<>

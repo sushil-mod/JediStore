@@ -20,7 +20,12 @@ const AuthorizeProvider = ({children})=>{
             case "LOGIN":
                 return {...authState , ...payload.foundUser , loginStatus:true ,encodedToken : payload.encodedToken }
             case "SIGNUP":
-                return {...authState , ...payload.createdUser , loginStatus:true ,encodedToken : payload.encodedToken } 
+                return {...authState , ...payload.createdUser , loginStatus:true ,encodedToken : payload.encodedToken }
+            case "LOGOUT":
+                return {
+                    loginStatus : false ,
+                    encodedToken :""
+                } 
             default:
                 return userState;
 

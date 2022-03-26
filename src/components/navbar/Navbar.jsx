@@ -5,7 +5,7 @@ import { useAthorizer } from '../../context/AuthorizerContext';
 import "./Navbar.css";
 function Navbar (){
 
-    const { authState } = useAthorizer();
+    const { authState , authDispatch } = useAthorizer();
 
     return<>
         <nav className="navbar flex-space-btw wd-100 bx-shadow navbar-position">
@@ -19,7 +19,7 @@ function Navbar (){
         </div>
         <div className="navbar-links flex-center" >
 
-            {authState.loginStatus?<Link className="nav-login-link" to="/login"><button className="nav-login-btn">Log out</button></Link>:<Link className="nav-login-link" to="/login"><button className="nav-login-btn">Login</button></Link>}
+            {authState.loginStatus? <span className="nav-login-link"> <button className="nav-login-btn" onClick={()=> authDispatch({ type:'LOGOUT' })} >Log out</button> </span> :<Link className="nav-login-link" to="/login"><button className="nav-login-btn">Login</button></Link>}
                         
             <ul className="nav-list">
                 <li className="nav-list-item">

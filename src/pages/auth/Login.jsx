@@ -20,6 +20,8 @@ const loginSubmitHandler=(e)=>{
 
         try {
             const {data , status } = await axios.post("/api/auth/login",{email,password});
+
+            console.log("from login",data , status);
             if(status === 200){
                 authDispatch({  type:"LOGIN" , payload : data })
                 navigator("/");

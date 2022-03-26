@@ -25,6 +25,9 @@ function Signup () {
 
             try {
                 const {data , status} = await axios.post("/api/auth/signup",{email,password,firstName,lastName})
+
+                console.log("from signup ",  data , status);
+
                 authDispatch({ type:"SIGNUP" , payload : data });  
                 navigator("/"); 
 
@@ -67,20 +70,20 @@ return<>
                         </div>
                         <div> 
                             <label className="padd-top-md" htmlFor="">Last Name </label>
-                            <input type="text" name='lastName' placeholder="Enter Last Name" />
+                            <input type="text" name='lastName' placeholder="Enter Last Name"  onChange={signupInputHandler} />
                         </div>
                     </div>
 
                     
 
                     <label className="padd-top-md" htmlFor="">Email Id</label>
-                    <input type="email" name='email' placeholder="Enter Email Id" />
+                    <input type="email" name='email' placeholder="Enter Email Id" onChange={signupInputHandler}  />
 
                     <label className="padd-top-md" htmlFor="">Password</label>
-                    <input type="password" name='password' placeholder="Enter Password" />
+                    <input type="password" name='password' placeholder="Enter Password" onChange={signupInputHandler}  />
 
                     <label className="padd-top-md" htmlFor="">Confirm Password</label>
-                    <input type="password" name='confpassword' placeholder="Enter Password" />
+                    <input type="password" name='confpassword' placeholder="Enter Password" onChange={signupInputHandler}  />
 
                 </div>
                 <div className="flex-space-btw padd-top-md wd-100">

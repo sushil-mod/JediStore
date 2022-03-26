@@ -10,7 +10,9 @@ const AuthorizeProvider = ({children})=>{
         loginStatus : false ,
         encodedToken :""
     }
+
     const [ authState , authDispatch ] = useReducer( authReducerFunc , initialAuthState);
+    console.log( "from context" ,authState);
 
     return<>
         <AuthorizerContext.Provider value={{ authState , authDispatch }} >

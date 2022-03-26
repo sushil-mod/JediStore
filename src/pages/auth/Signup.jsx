@@ -1,9 +1,16 @@
 import axios from 'axios';
-import React from 'react'
+import React ,{ useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { useAthorizer } from '../../context/AuthorizerContext';
 
 function Signup () {
+
+    const [ signupInput , setSignupInput ] = useState({
+        email:"",
+        password:"",
+        firstName:"",
+        lastName:""
+    })
 
     const navigator = useNavigate();
 
@@ -12,31 +19,25 @@ function Signup () {
     const signupSubmitHandler = (e)=>{
 
         e.preventDefault();
-        const [ firstName ,lastName , email , password ] = [ e.target[0].value,e.target[1].value,e.target[2].value,e.target[3].value ] ;
-        console.log(firstName ,lastName , email, password );
 
+        const {email , password ,firstName,lastName} = signupInput; 
         (async () => {
 
             try {
                 const {data , status} = await axios.post("/api/auth/signup",{email,password,firstName,lastName})
-
-                console.log( data , status) ;
                 authDispatch({ type:"SIGNUP" , payload : data });  
                 navigator("/"); 
 
             } catch (error) {
-                console.log("signup error");
+                
                 alert("signup error");
             }
-
-
         })();
-
-
-        
-
     }
 
+    const signupInputHandler =(e)=>{
+        setSignupInput({ ...signupInput , [e.target.name] : e.target.value });
+    }
 return<>
 
     <div className="flex-center height-vh-100">
@@ -62,24 +63,24 @@ return<>
                     <div className="flex-space-btw">
                         <div> 
                             <label className="padd-top-md" htmlFor="">First Name </label>
-                            <input type="text" placeholder="Enter First Name" />
+                            <input type="text" name='firstName' placeholder="Enter First Name" onChange={signupInputHandler} />
                         </div>
                         <div> 
                             <label className="padd-top-md" htmlFor="">Last Name </label>
-                            <input type="text" placeholder="Enter Last Name" />
+                            <input type="text" name='lastName' placeholder="Enter Last Name" />
                         </div>
                     </div>
 
                     
 
                     <label className="padd-top-md" htmlFor="">Email Id</label>
-                    <input type="email" placeholder="Enter Email Id" />
+                    <input type="email" name='email' placeholder="Enter Email Id" />
 
                     <label className="padd-top-md" htmlFor="">Password</label>
-                    <input type="password" placeholder="Enter Password" />
+                    <input type="password" name='password' placeholder="Enter Password" />
 
                     <label className="padd-top-md" htmlFor="">Confirm Password</label>
-                    <input type="password" placeholder="Enter Password" />
+                    <input type="password" name='confpassword' placeholder="Enter Password" />
 
                 </div>
                 <div className="flex-space-btw padd-top-md wd-100">

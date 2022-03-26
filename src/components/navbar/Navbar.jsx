@@ -7,7 +7,7 @@ function Navbar (){
     return<>
         <nav className="navbar flex-space-btw wd-100 bx-shadow navbar-position">
             <Link to="/">
-                <div className="nav-logo"><i class="fas fa-jedi nav-logo-icon"></i> <span className="nav-logo-txt">Jedi Store</span>
+                <div className="nav-logo"><i className="fas fa-jedi nav-logo-icon"></i> <span className="nav-logo-txt">Jedi Store</span>
                 </div>
             </Link>
         <div className="navbar-search">

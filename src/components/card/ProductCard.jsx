@@ -11,10 +11,10 @@ return <div key={_id}>
     <div className="card card-pos-rel">
         <img className="card-img" src={imageUrl} alt="Lago di Braies" />
 
-        <button className="dismiss"><i class="fas fa-heart wishlist-icon "></i></button>
+        <button className="dismiss"><i className="fas fa-heart wishlist-icon "></i></button>
 
-        { tag==="Trending" && <span class="card-badge">{tag}</span>}
-        { tag==="New Arrival" && <span class="card-badge badge-arrival">{tag}</span> }
+        { tag==="Trending" && <span className="card-badge">{tag}</span>}
+        { tag==="New Arrival" && <span className="card-badge badge-arrival">{tag}</span> }
 
         <div className="card-details">
 

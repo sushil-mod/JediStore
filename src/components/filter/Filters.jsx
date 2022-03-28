@@ -27,11 +27,11 @@ function Filters(){
                                 <ul>
                                     <li>
                                         <input type="radio" id="high_to_low" name="sort" checked={ filterState.sortBy === "HIGH_TO_LOW" } onChange={()=> filterDispatch({ type: "SORT" , payload: "HIGH_TO_LOW" }) } />
-                                        <label htmlfor="high_to_low"> High to Low</label>
+                                        <label htmlFor="high_to_low"> High to Low</label>
                                     </li>
                                     <li>
                                         <input type="radio" id="low_to_high" name="sort" checked={ filterState.sortBy === "LOW_TO_HIGH" } onChange={()=> filterDispatch({ type: "SORT" , payload: "LOW_TO_HIGH" }) }  />
-                                        <label htmlfor="low_to_high"> Low to High</label>
+                                        <label htmlFor="low_to_high"> Low to High</label>
                                     </li>
                                 </ul>
 

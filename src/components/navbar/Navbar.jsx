@@ -1,13 +1,16 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useAthorizer } from '../../context/AuthorizerContext';
 import "./Navbar.css";
 function Navbar (){
+
+    const { authState , authDispatch } = useAthorizer();
 
     return<>
         <nav className="navbar flex-space-btw wd-100 bx-shadow navbar-position">
             <Link to="/">
-                <div className="nav-logo"><i class="fas fa-jedi nav-logo-icon"></i> <span className="nav-logo-txt">Jedi Store</span>
+                <div className="nav-logo"><i className="fas fa-jedi nav-logo-icon"></i> <span className="nav-logo-txt">Jedi Store</span>
                 </div>
             </Link>
         <div className="navbar-search">
@@ -15,9 +18,9 @@ function Navbar (){
             <input className="search-input" type="text" name="search" placeholder="Search Here...." />
         </div>
         <div className="navbar-links flex-center" >
-            <Link className="nav-login-link" to="./screens/html/login.html">
-                <button className="nav-login-btn">Login</button>
-            </Link>
+
+            {authState.loginStatus? <span className="nav-login-link"> <button className="nav-login-btn" onClick={()=> authDispatch({ type:'LOGOUT' })} >Log out</button> </span> :<Link className="nav-login-link" to="/login"><button className="nav-login-btn">Login</button></Link>}
+                        
             <ul className="nav-list">
                 <li className="nav-list-item">
                     <Link className="nav-list-link icon-badge pos-rel" to="./screens/html/wishlist.html"><i

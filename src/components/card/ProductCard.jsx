@@ -17,6 +17,8 @@ const addToCart = async (product)=>{
             const response = await axios.post("/api/user/cart",{product},{headers:{ authorization : authState.encodedToken }})
             authDispatch({ type:"ADD_TO_CART" ,payload : response.data.cart });
         } catch (error) {
+            alert("Login to use cart ");
+            navigator("/login");
             console.log(error);
         }
     }

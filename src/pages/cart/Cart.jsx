@@ -11,7 +11,7 @@ function Cart() {
     const navigator=useNavigate();
     const { cart } = authState;
 
-    return authState.cart.length > 0 ?<>
+    return authState.loginStatus? ( authState.cart.length > 0 ?<>
         <Navbar/>
         <h1>My Cart</h1>
 
@@ -29,6 +29,9 @@ function Cart() {
             <h1>No Items In Cart </h1> 
             <button className='nav-login-btn' onClick={()=>navigator("/products")} >SHOP NOW</button> 
     </div>  
+   </>) : <>
+   <Navbar/>
+        <div className='flex-center flex-col'> <h1>Need To login</h1></div>
    </>
 }
 

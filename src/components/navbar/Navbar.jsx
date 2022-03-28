@@ -39,7 +39,7 @@ function Navbar (){
                     <div className="nav-list-link icon-badge pos-rel"  style={{ cursor:"pointer" }} >
                         <i className="fal fa-shopping-cart nav-link-icon" onClick={()=>authState.loginStatus?navigator("/cart"):navigator("/login") }  ></i>
                         {
-                            authState.loginStatus&&<div className= {`badge-number flex-center header-badge-color badge-on-icon pos-abt ${authState.cart.length<1 && "hide" }`} >
+                            authState.loginStatus&&<div className= {`badge-number flex-center header-badge-color badge-on-icon pos-abt ${  (authState.loginStatus && authState.cart.length<1) && "hide" }`} >
                                 {authState.cart.length}
                             </div>
                         }

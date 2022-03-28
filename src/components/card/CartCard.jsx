@@ -25,8 +25,7 @@ function CartCard({product}) {
         }
     }
 
-  return <>
-                          
+  return <>          
                 <div className="card card-horizontal" >
 
                     <img className="card-img img-height " style={{ height: " 100%"  }}  src={imageUrl} alt="Lago di Braies" />
@@ -60,10 +59,6 @@ function CartCard({product}) {
                                 </span>({ discount }% OFF)
                                 </h4>
                             </span>
-
-                            {/* <span>Price :<h3 className="inline-block">₹ { Math.ceil(( orignalPrice * (100 -
-                        discount)) / 100) } </h3> </span> */}
-
                         </div>
 
                         <button className="btn btn-shop card-fix-btn card-btn-sec "> <i className="fas fa-heart"></i> <span>Move to

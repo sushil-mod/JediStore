@@ -6,6 +6,7 @@ import "./Navbar.css";
 function Navbar (){
 
     const { authState , authDispatch } = useAthorizer();
+    const {loginStatus} = authState ;
     const navigator = useNavigate();
     return<>
         <nav className="navbar flex-space-btw wd-100 bx-shadow navbar-position">
@@ -21,25 +22,29 @@ function Navbar (){
 
             {authState.loginStatus? 
                     <span className="nav-login-link"> 
-                        <button className="nav-login-btn" onClick={()=> authDispatch({ type:'LOGOUT' })} >Log out</button>
+                        <button className="nav-login-btn cursor-pointer" onClick={()=> authDispatch({ type:'LOGOUT' })} >Log out</button>
                     </span> :
                     <Link className="nav-login-link" to="/login">
-                        <button className="nav-login-btn">Login</button>
+                        <button className="nav-login-btn cursor-pointer">Login</button>
                     </Link>
             }
                         
             <ul className="nav-list">
                 <li className="nav-list-item">
-                    <div className="nav-list-link icon-badge pos-rel"  style={{ cursor:"pointer" }} ><i
-                            className="fal fa-heart nav-link-icon"></i>
-                        <div className="badge-number flex-center header-badge-color badge-on-icon pos-abt">3</div>
+                    <div className="nav-list-link icon-badge pos-rel cursor-pointer">
+                        <i className="fal fa-heart nav-link-icon " onClick={()=>authState.loginStatus?navigator("/wishlist"):navigator("/login")}></i>
+                        {
+                            loginStatus&&<div className= {`badge-number flex-center header-badge-color badge-on-icon pos-abt ${  (loginStatus && authState.wishlist.length<1) && "hide" }`} >
+                                {authState.wishlist.length}
+                            </div>
+                        }
                     </div>
                 </li>
                 <li className="nav-list-item">
-                    <div className="nav-list-link icon-badge pos-rel"  style={{ cursor:"pointer" }} >
+                    <div className="nav-list-link icon-badge pos-rel cursor-pointer" >
                         <i className="fal fa-shopping-cart nav-link-icon" onClick={()=>authState.loginStatus?navigator("/cart"):navigator("/login") }  ></i>
                         {
-                            authState.loginStatus&&<div className= {`badge-number flex-center header-badge-color badge-on-icon pos-abt ${  (authState.loginStatus && authState.cart.length<1) && "hide" }`} >
+                            loginStatus&&<div className= {`badge-number flex-center header-badge-color badge-on-icon pos-abt ${  (loginStatus && authState.cart.length<1) && "hide" }`} >
                                 {authState.cart.length}
                             </div>
                         }

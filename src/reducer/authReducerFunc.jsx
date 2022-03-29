@@ -16,6 +16,10 @@ const authReducerFunc =( authState , authAction )=>{
             return {...authState, cart:payload}
         case "REMOVE_FROM_CART":
             return {...authState, cart:payload}
+        case "ADD_TO_WISHLIST":
+            return {...authState, wishlist:payload}
+        case "REMOVE_FROM_WISHLIST":
+            return {...authState, wishlist:payload}
         case "LOGOUT":
             return {
                 loginStatus : false ,

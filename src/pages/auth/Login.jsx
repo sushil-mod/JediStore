@@ -62,7 +62,7 @@ return <>
                 <button className="btn login padd-sm margin-btm" type="submit">Login</button>
             </div>
             <div className="form-btn ">
-                <button className="nav-login-btn" onClick={(e)=>{ e.preventDefault(); loginSubmitHandler(e,guestUser) } }>Login as guest</button>
+                <button className="nav-login-btn" onClick={(e)=>{loginSubmitHandler(e,guestUser) } }>Login as guest</button>
             </div>
             <div className="form-next padd-md ">
                 <span>

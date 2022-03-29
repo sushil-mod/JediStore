@@ -1,11 +1,27 @@
+import axios from 'axios';
 import React from 'react';
 import { FaShoppingCart,FaStar } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
+import { useAthorizer } from '../../context/AuthorizerContext';
 import './ProductCard.css'
   
 
 function ProductCard ( {product}){
 
 const {_id , name , rating , orignalPrice , discount , imageUrl , categoryName , tag , description} = product;
+const { authState ,authDispatch } = useAthorizer();
+const navigator =useNavigate();
+
+const addToCart = async (product)=>{
+        try {
+            const response = await axios.post("/api/user/cart",{product},{headers:{ authorization : authState.encodedToken }})
+            authDispatch({ type:"ADD_TO_CART" ,payload : response.data.cart });
+        } catch (error) {
+            alert("Login to use cart ");
+            navigator("/login");
+            console.log(error);
+        }
+    }
 
 return <div key={_id}>
     <div className="card card-pos-rel">
@@ -29,18 +45,9 @@ return <div key={_id}>
                         <FaStar /> </span>
                 </div>
             </div>
-
-
-
-
             <div className="card-header">{ name }</div>
             <p className="card-text">{description}</p>
-
-
             <div className="flex-space-btw">
-
-
-
                 <span>Rs :
                     <h4 className="inline-block price"> { Math.ceil(( orignalPrice * (100 -
                         discount)) / 100) }
@@ -50,14 +57,14 @@ return <div key={_id}>
                         ({ discount }% OFF)
                     </h4>
                 </span>
-
             </div>
-            <button className="btn btn-shop card-fix-btn card-btn-pri ">
-                <FaShoppingCart /> Add to Cart </button>
-
+            { (authState.loginStatus && authState.cart.some((item)=>item._id===_id)) ? (<button className="btn btn-shop card-fix-btn card-btn-sec" onClick={()=>navigator("/cart") }  >
+                        <FaShoppingCart /> Go to Cart </button>)
+                            :
+                    (<button className="btn btn-shop card-fix-btn card-btn-pri " onClick={()=>addToCart(product) }  >
+                        <FaShoppingCart /> Add to Cart </button>) }
         </div>
     </div>
-
 </div>
 
 }

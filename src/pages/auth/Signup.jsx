@@ -13,26 +13,17 @@ function Signup () {
     })
 
     const navigator = useNavigate();
-
     const { authDispatch } = useAthorizer();
 
     const signupSubmitHandler = (e)=>{
-
         e.preventDefault();
-
         const {email , password ,firstName,lastName} = signupInput; 
         (async () => {
-
             try {
                 const {data , status} = await axios.post("/api/auth/signup",{email,password,firstName,lastName})
-
-                console.log("from signup ",  data , status);
-
                 authDispatch({ type:"SIGNUP" , payload : data });  
                 navigator("/"); 
-
             } catch (error) {
-                
                 alert("signup error");
             }
         })();
@@ -42,17 +33,14 @@ function Signup () {
         setSignupInput({ ...signupInput , [e.target.name] : e.target.value });
     }
 return<>
-
     <div className="flex-center height-vh-100">
-
         <form className="form-auth flex-center flex-col bx-shadow" onSubmit={signupSubmitHandler} >
-
             <div className="form-logo wd-100">
                 <Link to="/"> 
-                <div className="nav-logo flex-center flex-col">
-                    <i className="fas fa-jedi nav-logo-icon"></i>
-                    <span className="nav-logo-txt">Jedi Store</span>
-                </div>
+                    <div className="nav-logo flex-center flex-col">
+                        <i className="fas fa-jedi nav-logo-icon"></i>
+                        <span className="nav-logo-txt">Jedi Store</span>
+                    </div>
                 </Link>
             </div>
 
@@ -74,8 +62,6 @@ return<>
                         </div>
                     </div>
 
-                    
-
                     <label className="padd-top-md" htmlFor="">Email Id</label>
                     <input type="email" name='email' placeholder="Enter Email Id" onChange={signupInputHandler}  />
 
@@ -89,11 +75,8 @@ return<>
                 <div className="flex-space-btw padd-top-md wd-100">
                     <span><input type="checkbox" /><span className="padd-left-sm">I aceept all terms &
                             conditions</span> </span>
-
                 </div>
             </div>
-
-
 
             <div className="form-btn ">
                 <button className="btn login padd-sm" type='submit'>Create New Acoount</button>
@@ -101,12 +84,8 @@ return<>
             <div className="form-next padd-md ">
                 <span> <Link to="/login" >Already have an account<i className="fas fa-angle-right padd-left-sm"></i></Link></span>
             </div>
-
         </form>
     </div>
-
-
-
 </>
 
 }

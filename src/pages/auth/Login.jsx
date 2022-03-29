@@ -4,63 +4,46 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAthorizer } from '../../context/AuthorizerContext';
 
 function Login() {
-const [ userInput ,setUserInput ] =useState({
-    email:"",
-    password:""
-});
+    const [ userInput ,setUserInput ] =useState({email:"",password:""});
+    const { authDispatch } = useAthorizer();
+    const navigator = useNavigate();
 
-const { authDispatch } = useAthorizer();
-const navigator = useNavigate();
-
-const loginSubmitHandler=(e)=>{
-
-    e.preventDefault();
-    const {email , password } = userInput;
-    (async () => {
-
-        try {
-            const {data , status } = await axios.post("/api/auth/login",{email,password});
-
-            console.log("from login",data , status);
-            if(status === 200){
-                authDispatch({  type:"LOGIN" , payload : data })
-                navigator("/");
+    const loginSubmitHandler=(e,{email,password})=>{
+        e.preventDefault();
+        (async () => {
+            try {
+                const {data , status } = await axios.post("/api/auth/login",{email,password});
+                if(status === 200){
+                    authDispatch({  type:"LOGIN" , payload : data })
+                    navigator("/");
+                }      
+            } catch (error) {
+                alert(error+" login failed " );
             }
-            
-        } catch (error) {
-            alert(error+" login failed " );
-        }
-
-
-    })();
-
-}
-
- const  inputChangeHandler = (e)=>{ 
-     
-    setUserInput({...userInput ,[e.target.name] : e.target.value })
- }
+        })();
+    }
+    const inputChangeHandler = (e)=>{ 
+        setUserInput({...userInput ,[e.target.name] : e.target.value })
+    }
+    const guestUser ={
+        email: "adarshbalika@gmail.com",
+        password: "adarshbalika"
+    }
 
 return <>
     <div className="flex-center height-vh-100">
-
-        <form className="form-auth flex-center flex-col bx-shadow" onSubmit={loginSubmitHandler}>
-
+        <form className="form-auth flex-center flex-col bx-shadow" onSubmit={(e)=>loginSubmitHandler(e,userInput)}>
             <div className="form-logo wd-100">
                 <Link to="/"> 
-                <div className="nav-logo flex-center flex-col">
-                    <i className="fas fa-jedi nav-logo-icon"></i>
-
-                    <span className="nav-logo-txt">Jedi Store</span>
-
-                </div>
+                    <div className="nav-logo flex-center flex-col">
+                        <i className="fas fa-jedi nav-logo-icon"></i>
+                        <span className="nav-logo-txt">Jedi Store</span>
+                    </div>
                 </Link>
             </div>
-
             <div className="form-login">
                 <h2 className="padd-top-md">Login</h2>
             </div>
-
             <div className="form-input padd-md wd-100">
                 <div className="input-container wd-100">
                     <label className="padd-top-md" htmlFor="">Username</label>
@@ -68,7 +51,6 @@ return <>
 
                     <label className="padd-top-md" htmlFor="">Password</label>
                     <input type="password" name='password' value={ userInput.password} placeholder="Enter Password" onChange={inputChangeHandler} />
-
                 </div>
                 <div className="flex-space-btw padd-top-md wd-100">
                     <span><input type="checkbox" /><span className="padd-left-sm">Remember me</span> </span>
@@ -77,16 +59,17 @@ return <>
             </div>
 
             <div className="form-btn ">
-                <button className="btn login padd-sm" type="submit">Login</button>
+                <button className="btn login padd-sm margin-btm" type="submit">Login</button>
+            </div>
+            <div className="form-btn ">
+                <button className="nav-login-btn" onClick={(e)=>{ e.preventDefault(); loginSubmitHandler(e,guestUser) } }>Login as guest</button>
             </div>
             <div className="form-next padd-md ">
                 <span>
                     <Link to="/signup"> Create New Acoount<i className="fas fa-angle-right padd-left-sm"></i></Link></span>
             </div>
-
-        </form>
+        </form>  
     </div>
-
 </>
 
 }

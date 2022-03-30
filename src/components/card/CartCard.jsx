@@ -1,30 +1,18 @@
 import axios from 'axios';
 import React from 'react'
 import { useAthorizer } from '../../context/AuthorizerContext';
+import {FaHeart} from 'react-icons/fa' 
+import { useNavigate } from 'react-router-dom';
+import {addToWishlist,removeFromWishlist,productQtyHandler ,removeFromCart} from '../../service calls/sevices'
 
 function CartCard({product}) {
   
     const {_id , name , rating , orignalPrice , discount , imageUrl , qty} = product;
     const { authState , authDispatch } = useAthorizer();
-
-    const productQtyHandler = async( productId , type ) => {
-        try {
-         const response = await axios.post(`/api/user/cart/${productId}`,{action:{type:`${type}`}},{headers:{authorization :authState.encodedToken }})   
-            authDispatch({ type:"QUANTITY" , payload : response.data.cart})
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
-    const removeFromCart = async(productId) =>{
-        try {
-                const response = await axios.delete(`/api/user/cart/${productId}`,{headers:{authorization :authState.encodedToken }})
-                authDispatch({type:"REMOVE_FROM_CART" , payload:response.data.cart});
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
+    const {loginStatus,encodedToken}=authState
+    const navigator=useNavigate();
+    const request = {encodedToken,authDispatch,navigator }
+    
   return <>          
                 <div className="card card-horizontal" >
 
@@ -37,13 +25,13 @@ function CartCard({product}) {
                         <div className="cart-qty padd-top-sm padd-btm-sm">
 
                             <p>Qty</p> 
-                            <button className="cart-qty-btn padd-sm" onClick={()=> qty > 1? productQtyHandler(_id,"decrement") : removeFromCart(_id) } >
+                            <button className="cart-qty-btn padd-sm" onClick={()=> qty > 1? productQtyHandler(_id,"decrement",request) : removeFromCart(_id,request) } >
                                 <i className="fas fa-minus"></i>
                             </button>
 
                             <input className="cart-qty-input" value={qty} readOnly />
 
-                            <button className="cart-qty-btn padd-sm"  onClick={()=> productQtyHandler(_id,"increment")} >
+                            <button className="cart-qty-btn padd-sm"  onClick={()=> productQtyHandler(_id,"increment",request)} >
                                 <i className="fas fa-plus"></i>
                             </button>
                         </div>
@@ -61,9 +49,20 @@ function CartCard({product}) {
                             </span>
                         </div>
 
-                        <button className="btn btn-shop card-fix-btn card-btn-sec "> <i className="fas fa-heart"></i> <span>Move to
-                                Wishlist</span> </button>
-                        <button className="btn btn-shop card-fix-btn card-btn-pri " onClick={()=> removeFromCart(_id)} >Remove from Cart</button>
+                        <button className="btn btn-shop card-fix-btn card-btn-sec flex-center"
+                         onClick={()=> ( loginStatus && authState.wishlist.some((item)=>item._id===_id)) ?
+                                removeFromWishlist(_id,request) : addToWishlist(product,request) 
+                                }> 
+                            <FaHeart  />
+                            {
+                                ( loginStatus && authState.wishlist.some((item)=>item._id===_id)) ? 
+                                <span>Remove From wishlist</span> :
+                                <span>Add To wishlist</span>  
+                            }
+                        </button>
+                        <button className="btn btn-shop card-fix-btn card-btn-pri " onClick={()=> removeFromCart(_id,request)} >
+                            Remove from Cart
+                        </button>
 
                     </div>
 

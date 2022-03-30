@@ -1,13 +1,8 @@
 import React from 'react'
+import {detailsReducer}from '../../service calls/sevices'
 
 function PriceDetailCard({cart}) {
 
-   const detailsReducer=(acc , curr )=>{
-    return {...acc , price: acc.price + curr.orignalPrice*curr.qty,
-         discount: acc.discount+((curr.discount*curr.orignalPrice*curr.qty)/100) , 
-         qty:acc.qty+curr.qty
-        }
-   }
     const { price, discount, qty, delivery } = cart.reduce( detailsReducer , { price:0, discount:0 , qty:0, delivery:100 } );
 
   return <>

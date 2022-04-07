@@ -8,7 +8,7 @@ import { v4 as uuid } from "uuid";
 export const categories = [
   {
     _id: uuid(),
-    categoryName: "Clothings",
+    categoryName: "Clothes",
     categoryIcons: "./assets/clothes100.png",
   },
   {

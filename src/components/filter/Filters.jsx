@@ -1,4 +1,6 @@
-import React from 'react';
+import React ,{ useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
+
 import { useProducts } from '../../context/ProductContext';
 
 import './Filters.css';
@@ -8,7 +10,21 @@ function Filters(){
 
     const catgegoryList =["Clothes","Toys","Collectibles","Merchandise"];
 
-     const { filterState , filterDispatch } = useProducts();
+    const { filterState , filterDispatch } = useProducts();
+
+    const [params] = useSearchParams();
+    
+    const categoryParam = params.get("categoryName");
+
+    useEffect( ()=> {
+
+        if(categoryParam )
+        filterDispatch({ type:"CATEGORY" , payload : categoryParam }) ;
+
+        return () =>{ filterDispatch({ type:"CLEAR" })  };
+
+    } ,[]) ;
+
 
     return <>
                 <aside className="flex-col product-sidebar bx-shadow aside-height " >
@@ -54,7 +70,7 @@ function Filters(){
                                         {catgegoryList.map((item)=> <li key={item}> <label><input type="checkbox" 
                                          checked={ filterState["category"].includes(item)}  
                                          onChange={()=> filterDispatch({ type:"CATEGORY" , payload : item }) }
-                                         /> {item}</label>  </li>   )}
+                                         /> {item}</label>  </li> )}
                                     </ul>
                                 </div>
                                 <p className="filter-head padd-md" >Price</p>

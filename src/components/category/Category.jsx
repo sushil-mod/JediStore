@@ -13,7 +13,8 @@ return<>
 
     <div className="home-product flex-center wd-100 margin-btm">
 
-        {category.map((item) => ( <div className="product-link category-div" key={item._id} ><Link  to="/products" className='flex-center'> <img src={item.categoryIcons} alt='clothesImage'/> {item.categoryName} </Link></div>  ) )}
+        {category.map(({ categoryName ,categoryIcons, _id }) => ( <div className="product-link category-div" key={_id}  >
+            <Link  to={`/products?categoryName=${categoryName}`} className='flex-center'> <img src={categoryIcons} alt='clothesImage'/> {categoryName} </Link></div>  ) )}
        
     </div>
 </>

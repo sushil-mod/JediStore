@@ -26,7 +26,7 @@ const authReducerFunc =( authState , authAction )=>{
                 encodedToken :""
             } 
         default:
-            return userState;
+            return authState;
 
     }
 

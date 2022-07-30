@@ -33,8 +33,9 @@ function Signup () {
         setSignupInput({ ...signupInput , [e.target.name] : e.target.value });
     }
 return<>
-    <div className="flex-center height-vh-100">
-        <form className="form-auth flex-center flex-col bx-shadow" onSubmit={signupSubmitHandler} >
+    <div className="flex-center height-vh-100 position-rel">
+    <img className='img-background' src="./assets/jedibackground.png" alt="backgroundBanner"/>
+        <form className="form-auth flex-center flex-col bx-shadow bg-white" onSubmit={signupSubmitHandler} >
             <div className="form-logo wd-100">
                 <Link to="/"> 
                     <div className="nav-logo flex-center flex-col">

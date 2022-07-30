@@ -10,7 +10,7 @@ import './Product.css';
 function Product() {
 
 
-    const { filteredList  } = useProducts();
+    const { filteredList ,filterState } = useProducts();
   return <>
      <Navbar/>
   <div className='d-flex' >
@@ -19,7 +19,13 @@ function Product() {
 
         <div className='main-content-product' > 
 
-                {filteredList.map(( product )=>  <ProductCard product={ product }  key = {product._id} />  )}
+                {filteredList.filter(( item )=>{ 
+                    if( filterState.searchFilter == null ){
+                        return item 
+                    }else if (item.name.toLowerCase().includes( filterState.searchFilter?.toLowerCase())){
+                        return item
+                    } 
+                }).map(( product )=>  <ProductCard product={ product }  key = {product._id} />  )}
 
         </div> 
 

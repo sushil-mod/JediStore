@@ -18,7 +18,10 @@ const filterReducerFunc=(filterState , filteraction )=>{
             return {...filterState , category : [...filterState.category , filteraction.payload ] };
          
         case "PRICE_RANGE":
-            return { ...filterState , priceRange : filteraction.payload  }    
+            return { ...filterState , priceRange : filteraction.payload  }
+        
+        case "SEARCH_FILTER":
+            return { ...filterState , searchFilter : filteraction.payload  }
 
         case "CLEAR":
             return { 

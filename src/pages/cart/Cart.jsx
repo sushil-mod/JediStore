@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import CartCard from '../../components/card/CartCard';
 import PriceDetailCard from '../../components/card/PriceDetailCard';
@@ -10,6 +10,24 @@ function Cart() {
     const { authState , authDispatch } = useAthorizer();
     const navigator=useNavigate();
     const { cart } = authState;
+
+    const loadScript = (src) => {
+        return new Promise((resolve) => {
+            const script = document.createElement("script");
+            script.src = src ;
+            script.onload = () =>{
+                resolve(true);
+            };
+            script.onerror = () => {
+                resolve(false);
+            };
+            document.body.appendChild(script);
+        });
+    };
+
+    useEffect(() => {
+        loadScript("https://checkout.razorpay.com/v1/checkout.js");
+    });
 
     return authState.loginStatus? ( authState.cart.length > 0 ?<>
         <Navbar/>

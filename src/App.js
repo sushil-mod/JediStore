@@ -13,6 +13,7 @@ import Product from "./pages/product/Product";
 import Wishlist from "./pages/wishlist/Wishlist";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Checkout from "./pages/checkout/Checkout";
 
 
 
@@ -39,6 +40,7 @@ function App() {
             <Route path="/signup" element={<Signup/>} />
             <Route path="/cart" element={ <PrivateRoutes><Cart/></PrivateRoutes> } />
             <Route path="/wishlist" element={<PrivateRoutes> <Wishlist/> </PrivateRoutes>} />
+            <Route path="/checkout" element={<PrivateRoutes> <Checkout/> </PrivateRoutes>} />
         </Routes>
     </div>
      

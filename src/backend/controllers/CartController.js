@@ -146,3 +146,17 @@ export const updateCartItemHandler = function (schema, request) {
     );
   }
 };
+
+export const clearCartHandler = function ( schema ,request ){
+  const userId = requiresAuth.call(this,request);
+  try {
+    if(!userId){
+      return new Response( 404,{},{ error:[" The User is NOt Registered. "]  } );
+    }
+    this.db.users.update({cart:[] });
+    return new Response(200,{},{cart:[]});
+  } catch (error) {
+    return new Response( 500,{},{ error, } );
+  }
+
+}

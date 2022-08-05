@@ -56,9 +56,9 @@ return <>
             <div className="form-input padd-md wd-100">
                 <div className="input-container wd-100">
                     <label className="padd-top-md" htmlFor="">Username</label>
-                    <input type="email" name='email' value={ userInput.email} placeholder="Enter emailId" onChange={inputChangeHandler}  />
+                    <input type="email" name='email' value={ userInput.email} placeholder="Enter emailId" onChange={inputChangeHandler} required />
                     <label className="padd-top-md" htmlFor="">Password</label>
-                    <input type="password" name='password' value={ userInput.password} placeholder="Enter Password" onChange={inputChangeHandler}  />
+                    <input type="password" name='password' value={ userInput.password} placeholder="Enter Password" onChange={inputChangeHandler} required />
                 </div>
                 {/* <div className="flex-space-btw padd-top-md wd-100">
                     <span><input type="checkbox" /><span className="padd-left-sm">Remember me</span> </span>

@@ -33,8 +33,9 @@ function Signup () {
         setSignupInput({ ...signupInput , [e.target.name] : e.target.value });
     }
 return<>
-    <div className="flex-center height-vh-100">
-        <form className="form-auth flex-center flex-col bx-shadow" onSubmit={signupSubmitHandler} >
+    <div className="flex-center height-vh-100 position-rel">
+    <img className='img-background' src="./assets/jedibackground.png" alt="backgroundBanner"/>
+        <form className="form-auth flex-center flex-col bx-shadow bg-white" onSubmit={signupSubmitHandler} >
             <div className="form-logo wd-100">
                 <Link to="/"> 
                     <div className="nav-logo flex-center flex-col">
@@ -54,26 +55,26 @@ return<>
                     <div className="flex-space-btw">
                         <div> 
                             <label className="padd-top-md" htmlFor="">First Name </label>
-                            <input type="text" name='firstName' placeholder="Enter First Name" onChange={signupInputHandler} />
+                            <input type="text" name='firstName' placeholder="Enter First Name" onChange={signupInputHandler} required />
                         </div>
                         <div> 
                             <label className="padd-top-md" htmlFor="">Last Name </label>
-                            <input type="text" name='lastName' placeholder="Enter Last Name"  onChange={signupInputHandler} />
+                            <input type="text" name='lastName' placeholder="Enter Last Name"  onChange={signupInputHandler} required />
                         </div>
                     </div>
 
                     <label className="padd-top-md" htmlFor="">Email Id</label>
-                    <input type="email" name='email' placeholder="Enter Email Id" onChange={signupInputHandler}  />
+                    <input type="email" name='email' placeholder="Enter Email Id" onChange={signupInputHandler} required />
 
                     <label className="padd-top-md" htmlFor="">Password</label>
-                    <input type="password" name='password' placeholder="Enter Password" onChange={signupInputHandler}  />
+                    <input type="password" name='password' placeholder="Enter Password" onChange={signupInputHandler} required />
 
                     <label className="padd-top-md" htmlFor="">Confirm Password</label>
-                    <input type="password" name='confpassword' placeholder="Enter Password" onChange={signupInputHandler}  />
+                    <input type="password" name='confpassword' placeholder="Enter Password" onChange={signupInputHandler} required />
 
                 </div>
                 <div className="flex-space-btw padd-top-md wd-100">
-                    <span><input type="checkbox" /><span className="padd-left-sm">I aceept all terms &
+                    <span><input type="checkbox" /><span className="padd-left-sm" required >I aceept all terms &
                             conditions</span> </span>
                 </div>
             </div>

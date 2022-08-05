@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React from 'react';
 import { FaShoppingCart,FaStar } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate ,useLocation } from 'react-router-dom';
 import { useAthorizer } from '../../context/AuthorizerContext';
 import {addToWishlist ,removeFromWishlist ,addToCart } from '../../service calls/sevices';
 import './ProductCard.css'
@@ -12,7 +12,8 @@ function ProductCard ( {product}){
 const {_id , name , rating , orignalPrice , discount , imageUrl , categoryName , tag , description} = product;
 const { authState ,authDispatch } = useAthorizer();
 const {loginStatus,encodedToken} =authState
-const navigator =useNavigate();
+const navigate =useNavigate();
+const location = useLocation(); 
 const request = {encodedToken,authDispatch,navigator }
 
 return <div key={_id}>
@@ -21,14 +22,14 @@ return <div key={_id}>
 
         <button className="dismiss" 
             onClick={
-                    ()=> ( loginStatus && authState.wishlist.some((item)=>item._id===_id)) ? 
+                    ()=> (loginStatus && authState.wishlist.some((item)=>item._id===_id)) ? 
                     removeFromWishlist(_id,request) : 
-                    addToWishlist(product,request) 
+                    loginStatus?addToWishlist(product,request):navigate("/login",{state:{from:location}})
                     } >
            {
                 ( loginStatus && authState.wishlist.some((item)=>item._id===_id)) ? 
-                <i className="fas fa-heart wishlist-icon wishlist-color" ></i> :
-                <i className="fas fa-heart wishlist-icon " ></i> 
+                <i className="fas fa-heart wishlist-icon wishlist-color"></i> :
+                <i className="fas fa-heart wishlist-icon"></i> 
            }
         </button>
 
@@ -61,10 +62,10 @@ return <div key={_id}>
                     </h4>
                 </span>
             </div>
-            { (loginStatus && authState.cart.some((item)=>item._id===_id)) ? (<button className="btn btn-shop card-fix-btn card-btn-sec" onClick={()=>navigator("/cart") }  >
+            { (loginStatus && authState.cart.some((item)=>item._id===_id)) ? (<button className="btn btn-shop card-fix-btn card-btn-sec" onClick={()=>navigate("/cart") }  >
                         <FaShoppingCart /> Go to Cart </button>)
                             :
-                    (<button className="btn btn-shop card-fix-btn card-btn-pri " onClick={()=>addToCart(product,request) }  >
+                    (<button className="btn btn-shop card-fix-btn card-btn-pri " onClick={()=>loginStatus?addToCart(product,request):navigate("/login",{state:{from:location}}) }  >
                         <FaShoppingCart /> Add to Cart </button>) }
         </div>
     </div>

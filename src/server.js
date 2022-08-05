@@ -8,6 +8,7 @@ import {
   getCartItemsHandler,
   removeItemFromCartHandler,
   updateCartItemHandler,
+  clearCartHandler,
 } from "./backend/controllers/CartController";
 import {
   getAllCategoriesHandler,
@@ -22,9 +23,16 @@ import {
   getWishlistItemsHandler,
   removeItemFromWishlistHandler,
 } from "./backend/controllers/WishlistController";
+import {
+  getAddressHandler,
+  addAddressHandler,
+  removeAddressHandler,
+  updateAddressHandler,
+} from "./backend/controllers/AddressController";
 import { categories } from "./backend/db/categories";
 import { products } from "./backend/db/products";
 import { users } from "./backend/db/users";
+import { v4 as uuid } from 'uuid';
 
 export function makeServer({ environment = "development" } = {}) {
   return new Server({
@@ -38,6 +46,7 @@ export function makeServer({ environment = "development" } = {}) {
       user: Model,
       cart: Model,
       wishlist: Model,
+      address: Model,
     },
 
     // Runs on the start of the server
@@ -49,7 +58,17 @@ export function makeServer({ environment = "development" } = {}) {
       });
 
       users.forEach((item) =>
-        server.create("user", { ...item, cart: [], wishlist: [] })
+        server.create("user", { ...item, cart: [], wishlist: [],
+        address:[{
+          _id:uuid(),
+          name:'John Doe',
+          street:'331,darshan colony,nandanvan',
+          city:'Nagpur',
+          state:'Maharashtra',
+          pincode:'440009',
+          mobile:'1234567890',
+        },],
+        })
       );
 
       categories.forEach((item) => server.create("category", { ...item }));
@@ -77,14 +96,18 @@ export function makeServer({ environment = "development" } = {}) {
         "/user/cart/:productId",
         removeItemFromCartHandler.bind(this)
       );
+      this.delete("/user/cart",clearCartHandler.bind(this));
 
       // wishlist routes (private)
       this.get("/user/wishlist", getWishlistItemsHandler.bind(this));
       this.post("/user/wishlist", addItemToWishlistHandler.bind(this));
-      this.delete(
-        "/user/wishlist/:productId",
-        removeItemFromWishlistHandler.bind(this)
-      );
+      this.delete("/user/wishlist/:productId",removeItemFromWishlistHandler.bind(this));
+
+      //Address routes (private)
+			this.get('/user/address', getAddressHandler.bind(this));
+			this.post('/user/address', addAddressHandler.bind(this));
+			this.post('/user/address/:addressId', updateAddressHandler.bind(this));
+			this.delete('/user/address/:addressId', removeAddressHandler.bind(this));
     },
   });
 }

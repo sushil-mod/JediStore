@@ -18,6 +18,7 @@ const ProductProvider = ({ children })=>{
         category : [],
         rating : 0,
         priceRange : 5000,
+        searchFilter : "",
     }
     const [ filterState , filterDispatch ] = useReducer(filterReducerFunc , initialFilterState);
 
@@ -29,7 +30,7 @@ const ProductProvider = ({ children })=>{
         getCategoryFilter,
         getPriceRangeFilter
     )(filterState , productList)
-
+        console.log("filterState",filterState);
      useEffect(()=>{
 
         (async()=>{

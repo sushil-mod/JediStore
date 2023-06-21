@@ -20,7 +20,7 @@ jobs:
     - name: ssh deploy on aws ec2
       uses: easingthemes/ssh-deploy@v2.1.4
       with:
-          ARGS: -avzr --delete
+          #ARGS: -avzr --delete
           SOURCE: ./*
           TARGET: /var/www/html/
           REMOtE_HOST: ec2-3-110-45-206.ap-south-1.compute.amazonaws.com

@@ -1,1 +1,28 @@
-#Code will be written here
+on:
+  push:
+    branches: [ main ]
+ 
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js 16.14 to Build
+      uses: actions/setup-node@v2
+      with:
+        node-version: 16.14
+#     - run: wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+#     - run: nvm install 16.14
+#     - run: nvm use 16.14
+    - run: npm install --legacy-peer-deps
+   # - run: npm run build
+    - run: CI=false npm run build
+    - name: ssh deploy on aws ec2
+      uses: easingthemes/ssh-deploy@v2.1.4
+      with:
+          #switches: -avzr --delete
+          path: ./*
+          remote_path: /var/www/
+          remote_host: ec2-3-110-45-206.ap-south-1.compute.amazonaws.com
+          remote_user: ubuntu
+          remote_key: "${{ secrets.SSH_PRIVATE_KEY }}"

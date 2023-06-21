@@ -20,10 +20,10 @@ jobs:
     - name: ssh deploy on aws ec2
       uses: easingthemes/ssh-deploy@v2.1.4
       with:
-          switches: -avzr --delete
-          path: ./*
-          remote_path: /var/www/html/
-          remote_host: ec2-3-110-45-206.ap-south-1.compute.amazonaws.com
-          remote_user: ubuntu
-          remote_key: "${{ secrets.SSH_PRIVATE_KEY }}"
-          remote_port: 22
+          ARGS: -avzr --delete
+          SOURCE: ./*
+          TARGET: /var/www/html/
+          REMOtE_HOST: ec2-3-110-45-206.ap-south-1.compute.amazonaws.com
+          REMOTE_USER: ubuntu
+          REMOTE_KEY: "${{ secrets.SSH_PRIVATE_KEY }}"
+          REMOTE_PORT: 22
